@@ -12,7 +12,7 @@ Feel free to join us as a collaborator.
 Any question please contact us.
 
 
-Project leader:
+Project leader: 
 
 Gabriel Pündrich
 
