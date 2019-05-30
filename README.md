@@ -12,6 +12,7 @@ Feel free to join us as a collaborator.
 Any question please contact me.
 
 Gabriel Pündrich
+gabriel.pundrich@unibocconi.it
 Bocconi University
 
 
