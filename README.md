@@ -9,10 +9,14 @@ We also incorporate publicly available algorithms by other researchers and, in s
 
 Feel free to join us as a collaborator.
 
-Any question please contact me.
+Any question please contact us.
 
+
+Project leader:
 Gabriel Pündrich
+
 gabriel.pundrich@unibocconi.it
+
 Bocconi University
 
 
