@@ -12,14 +12,14 @@ Project Leader:
 
 Collaborators:
 
-Computer Engineering:
-- Andrio Spich (MSc Computer Engineering) https://www.linkedin.com/in/andrio/
-
 Accounting:
 - Denis Lima e Alves (PostDoc Bocconi) https://www.linkedin.com/in/denis-l-821981170/
 
 Computational Law:
 - Valeria Marcia (PhD Candidate, Computational Law Specialist) https://www.linkedin.com/in/valeria-marcia-19289267/
+
+Computer Engineering:
+- Andrio Spich (MSc Computer Engineering) https://www.linkedin.com/in/andrio/
 
 Contact us to join us as a collaborator.
 
