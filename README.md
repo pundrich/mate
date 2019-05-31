@@ -7,15 +7,13 @@ The original proprietary code is allowed to be used for non-commercial purposes 
 
 We also incorporate publicly available algorithms by other researchers and, in such cases, the proper reference is disclosed in the code.
 
-Project leader: 
--Gabriel Pündrich
--gabriel.pundrich@unibocconi.it
-- Bocconi University
+Project Leader:
+-Gabriel Pündrich, PhD https://www.linkedin.com/in/pundrich/
 
 Collaborators:
 - Andrio Spich (MSc Computer Engineering) https://www.linkedin.com/in/andrio/
 - Denis Lima e Alves (PostDoc Bocconi) https://www.linkedin.com/in/denis-l-821981170/
-- Valeria Marcia (Lawyer, PhD Candidate) https://www.linkedin.com/in/valeria-marcia-19289267/
+- Valeria Marcia (PhD Candidate, Computational Law Specialist) https://www.linkedin.com/in/valeria-marcia-19289267/
 
 Contact us to join us as a collaborator.
 
