@@ -21,6 +21,6 @@ Computational Law:
 Computer Engineering:
 - Andrio Spich (MSc Computer Engineering) https://www.linkedin.com/in/andrio/
 
-Contact us to join us as a collaborator.
+Contact us if you are interested in joining as a collaborator.
 
 Any question please contact us.
