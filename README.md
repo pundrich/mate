@@ -9,7 +9,7 @@ We also incorporate publicly available algorithms by other researchers and, in s
 
 
 Collaborators:
-- Denis Lima e Alves (PostDoc Bocconi) https://www.linkedin.com/in/denis-l-821981170/?originalSubdomain=it 
+- Denis Lima e Alves (PostDoc Bocconi) https://www.linkedin.com/in/denis-l-821981170/
 - Valeria Marcia (Lawyer, PhD Candidate) https://www.linkedin.com/in/valeria-marcia-19289267/
 
 Contact us to join us as a collaborator.
