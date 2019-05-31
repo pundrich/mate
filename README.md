@@ -10,7 +10,7 @@ We also incorporate publicly available algorithms by other researchers and, in s
 Project Leader:
 - Gabriel Pündrich, PhD  https://www.linkedin.com/in/pundrich/
 
-Collaborators:
+Collaborators by area:
 
 Accounting:
 - Denis Lima e Alves (PostDoc Bocconi) https://www.linkedin.com/in/denis-l-821981170/
