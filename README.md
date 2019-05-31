@@ -7,6 +7,9 @@ The original proprietary code is allowed to be used for non-commercial purposes 
 
 We also incorporate publicly available algorithms by other researchers and, in such cases, the proper reference is disclosed in the code.
 
+Collaborators:
+- Andrio Spich (MSc Computer Engineering) https://www.linkedin.com/in/andrio/
+
 Project Leader:
 -Gabriel Pündrich, PhD https://www.linkedin.com/in/pundrich/
 
