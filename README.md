@@ -7,7 +7,12 @@ The original proprietary code is allowed to be used for non-commercial purposes 
 
 We also incorporate publicly available algorithms by other researchers and, in such cases, the proper reference is disclosed in the code.
 
-Feel free to join us as a collaborator.
+
+Collaborators:
+- Denis Lima e Alves (PostDoc Bocconi) https://www.linkedin.com/in/denis-l-821981170/?originalSubdomain=it 
+- Valeria Marcia (Lawyer, PhD Candidate) https://www.linkedin.com/in/valeria-marcia-19289267/
+
+Contact us to join us as a collaborator.
 
 Any question please contact us.
 
