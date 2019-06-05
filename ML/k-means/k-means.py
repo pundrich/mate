@@ -11,18 +11,6 @@ https://www.geeksforgeeks.org/multidimensional-data-analysis-in-python/
 @author: gabrielpundrich
 """
 
-#When using k-means, you want to set the random_state parameter in KMeans (see the documentation). Set this to either an int or a RandomState instance.
-#
-#km = KMeans(n_clusters=number_of_k, init='k-means++', 
-#            max_iter=100, n_init=1, verbose=0, random_state=3425)
-#km.fit(X_data)
-#This is important because k-means is not a deterministic algorithm. It usually starts with some randomized initialization procedure, and this randomness means that different runs will start at different points. Seeding the pseudo-random number generator ensures that this randomness will always be the same for identical seeds.
-#
-#I'm not sure about the spectral clustering example though. From the documentation on the random_state parameter: "A pseudo random number generator used for the initialization of the lobpcg eigen vectors decomposition when eigen_solver == 'amg' and by the K-Means initialization." OP's code doesn't seem to be contained in those cases, though setting the parameter might be worth a shot.
-#
-#
-
-
 
 
 import pandas as pd 
@@ -36,7 +24,7 @@ import time
 timestr = time.strftime("%Y%m%d-%H%M%S")
 
 
-path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/finance_accounting_data_science/"
+path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
 
 
 base_dir = path_env + "/ML/k-means/"

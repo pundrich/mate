@@ -13,9 +13,10 @@ def install(package):
     subprocess.call([sys.executable, "-m", "pip", "install", package])
 
 
-install("edgar")
 
+install("python-edgar")
 
+uninstall("edgar)
 #install("vaderSentiment")
 
 #install("plotly")

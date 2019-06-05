@@ -39,11 +39,15 @@ import string
 import sys
 import time
 
- 
-PATH_FILES = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/finance_accounting_data_science/nlp/"
+###################################################################################
+path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
+###################################################################################
 
+PATH_FILES = path_env + "/nlp/"
 sys.path.append(PATH_FILES+'LM')  # Modify to identify path for custom modules
 import Load_MasterDictionary as LM
+
+
 
 
 
