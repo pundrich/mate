@@ -1,0 +1,11 @@
+<HEADER>
+COMPANY NAME: ENDOCARE INC
+CIK: 0001003464
+SIC: 3845
+FORM TYPE: 10-K
+REPORT PERIOD END DATE: 20061231
+FILE DATE: 20070316
+</HEADER>
+<SECTION>
+Item 7 Managements Discussion and Analysis of Financial Condition and Results of Operations and our consolidated financial statements and related notes included elsewhere in this Annual Report on Form 10 K. The selected financial data as of and for the years ended December 31, 2002, 2003 and 2004 were previously restated. Detailed information regarding these restatements is disclosed in Notes 3 and 16 to our consolidated financial statements 24 Table of Contents filed in our annual report on Form 10 K for the year ended December 31, 2002 and Note 2 to our consolidated financial statements filed in our annual report on Form 10 K (as amended) for the year ended December 31, 2004. As discussed below is Part II, Item 7 Managements Discussion and Analysis of Financial Condition and Results of Operations effective January 1, 2006 we adopted Statement of Financial Accounting Standards No. 123 (revised 2004), Share Based Payment, which changed the way we account for our stock based compensation. Our historical results are not necessarily indicative of operating results to be expected in the future. 2002 2003 2004 2005 2006 Revenues from continuing operations $ 17,901 $ 19,604 $ 24,181 $ 28,274 $ 27,990 Loss from continuing operations $ (26,492 ) $ (24,963 ) $ (31,901 ) $ (14,838 ) $ (11,076 ) Net loss per share of common stock basic and diluted (continuing operations) $ (1.11 ) $ (1.03 ) $ (1.31 ) $ (0.51 ) $ (0.37 ) Weighted average shares of common stock outstanding 23,822 24,162 24,263 28,978 30,253 Balance Sheet Data: Total assets $ 92,628 $ 71,997 $ 34,374 $ 32,237 $ 16,246 Common stock warrants $ $ $ $ 5,023 $ 1,307 Item 7. Managements Discussion and Analysis of Financial Condition and Results of Operations The following discussion should be read in conjunction with Item 1 Business, Item 1A Risk Factors, Item 6 Selected Consolidated Financial Data and 
+</SECTION>
