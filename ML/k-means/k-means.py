@@ -50,8 +50,6 @@ for year_selected in range(1998,1999):
     #select columns
     #cluster 1
     firm_data = firm_data[[ 'evs', 'pb',  'lev', 'rnoa', 'roe', 'rd','consensus_me','profit_margin','intro', 'gro', 'mat', 'decltot', 'shaketot']].copy()
-    
-    
       
     #cluster 2
     #firm_data = firm_data[[ 'mkvalt2','dltt','dlc','pstk','mib','ch','sale', 'pb',  'lev', 'rnoa', 'roe', 'rd','consensus_me','profit_margin','intro', 'gro', 'mat', 'decltot', 'shaketot']].copy()
@@ -65,10 +63,6 @@ for year_selected in range(1998,1999):
     # print first 5 rows of zoo data  
     print(firm_data.head())
     
-    
-    
-     
-     
     
 #    # Python code to Standardize data (0 mean, 1 stdev) 
     from sklearn.preprocessing import StandardScaler 
