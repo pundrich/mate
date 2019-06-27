@@ -224,6 +224,8 @@ rms=np.sqrt(np.mean(np.power((valid-closing_price),2)))
 rms
 
 
+
+
 #for plotting
 train = new_data[:987]
 valid = new_data[987:]

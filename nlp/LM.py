@@ -126,7 +126,7 @@ def get_data(doc):
     
     _odata[13] = len(re.findall(r'\b[-+\(]?[$€£]?[-+(]?\d+\)?\b', doc))
     _odata[14] = total_syllables / _odata[2]
-    _odata[15] = word_length / _odata[2]
+    _odata[15] = word_length / _od.ata[2]
     _odata[16] = len(vdictionary)
     
     # Convert counts to %

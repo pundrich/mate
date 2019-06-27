@@ -23,9 +23,9 @@ import time
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 
-
+################################################################################
 path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
-
+################################################################################
 
 base_dir = path_env + "/ML/k-means/"
 output_dir =base_dir + "/output/"
@@ -38,6 +38,8 @@ firm_data_pre = pd.read_csv(base_dir + "/input/input_compustat.csv", encoding = 
 print(firm_data_pre.columns)
 
 cluster_map_final= pd.DataFrame()
+
+
 
 for year_selected in range(1998,1999):
     print (year_selected)

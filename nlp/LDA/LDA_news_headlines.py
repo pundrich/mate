@@ -13,8 +13,10 @@ data_text = data[['headline_text']]
 data_text['index'] = data_text.index
 
 #restrict just to top 100
-documents = data_text.head(1000)
+#documents = data_text.head(1000)
 
+
+data_text.head(10)
 len(documents)
 
 documents[:5]
@@ -91,6 +93,7 @@ processed_docs[:10]
 
 dictionary = gensim.corpora.Dictionary(processed_docs)
 
+documents[:10]
 
 
 corpus = [dictionary.doc2bow(sent) for sent in processed_docs]

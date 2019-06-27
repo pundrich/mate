@@ -23,7 +23,7 @@ from keras.layers import LSTM
 
 path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
 
-path_env = path_env+"/ML/LTSM/"
+path_env = path_env+"/ML/LTSM_Multivariate/"
 
 
 
@@ -33,45 +33,41 @@ from pandas import read_csv
 from datetime import datetime
 # load data
 
+# specify the number of lag hours
+n_lags_used = 3
+n_epochs = 50
+
+#number of training obs
+n_train_lags_used = 1670 
+
+
 def parse(x):
 	return datetime.strptime(x, '%Y %m %d %H')
 
-dataset = read_csv(path_env+'raw.csv',  parse_dates = [['year', 'month', 'day', 'hour']], index_col=0, date_parser=parse)
-dataset.drop('No', axis=1, inplace=True)
-
-# manually specify column names
-dataset.columns = ['pollution', 'dew', 'temp', 'press', 'wnd_dir', 'wnd_spd', 'snow', 'rain']
-dataset.index.name = 'date'
-
-# mark all NA values with 0
-dataset['pollution'].fillna(0, inplace=True)
-
-# drop the first 24 hours
-dataset = dataset[24:]
-
-# summarize first 5 rows
-print(dataset.head(5))
-
-# save to file
-dataset.to_csv(path_env+'pollution.csv')
 
 
 from pandas import read_csv
 from matplotlib import pyplot
+
 # load dataset
-dataset = read_csv(path_env+'pollution.csv', header=0, index_col=0)
+dataset = read_csv(path_env+'price_data.csv', header=0, index_col=0)
 values = dataset.values
-# specify columns to plot
-groups = [0, 1, 2, 3, 5, 6, 7]
-i = 1
-# plot each column
-pyplot.figure()
-for group in groups:
-	pyplot.subplot(len(groups), 1, i)
-	pyplot.plot(values[:, group])
-	pyplot.title(dataset.columns[group], y=0.5, loc='right')
-	i += 1
-pyplot.show()
+
+
+#number of vars in y
+n_features = dataset.shape[1]
+
+## specify columns to plot
+#groups = [0, 1, 2, 3, 5, 6]
+#i = 1
+## plot each column
+#pyplot.figure()
+#for group in groups:
+#	pyplot.subplot(len(groups), 1, i)
+#	pyplot.plot(values[:, group])
+#	pyplot.title(dataset.columns[group], y=0.5, loc='right')
+#	i += 1
+#pyplot.show()
 
 
 # convert series to supervised learning
@@ -100,12 +96,12 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 	return agg
 
 # load dataset
-dataset = read_csv(path_env+'pollution.csv', header=0, index_col=0)
+dataset = read_csv(path_env+'price_data.csv', header=0, index_col=0)
 values = dataset.values
 
-# integer encode direction (as it is a categorical variable in the 4th column with the direction of the wind - give a number to each category)
-encoder = LabelEncoder()
-values[:,4] = encoder.fit_transform(values[:,4])
+# useful for ind classification maybe... integer encode direction (as it is a categorical variable in the 4th column with the direction of the wind - give a number to each category)
+#encoder = LabelEncoder()
+#values[:,4] = encoder.fit_transform(values[:,4])
 
 # ensure all data is float
 values = values.astype('float32')
@@ -114,9 +110,6 @@ values = values.astype('float32')
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled = scaler.fit_transform(values)
 
-# specify the number of lag hours
-n_lags_used = 10
-n_features = 8
 
 # frame as supervised learning (using 3 hours as input) (basically creates three lags)
 reframed = series_to_supervised(scaled, n_lags_used, 1)
@@ -124,7 +117,7 @@ print(reframed.shape)
 
 # split into train and test sets
 values = reframed.values
-n_train_lags_used = 365 * 24
+
 train = values[:n_train_lags_used, :]
 test = values[n_train_lags_used:, :]
 
@@ -152,7 +145,7 @@ model.add(Dense(1))
 model.compile(loss='mae', optimizer='adam')
 
 # fit network
-history = model.fit(train_X, train_y, epochs=50, batch_size=72, validation_data=(test_X, test_y), verbose=2, shuffle=False)
+history = model.fit(train_X, train_y, epochs=n_epochs, batch_size=72, validation_data=(test_X, test_y), verbose=1, shuffle=False)
 
 # plot history
 pyplot.plot(history.history['loss'], label='train')
@@ -165,13 +158,13 @@ yhat = model.predict(test_X)
 test_X = test_X.reshape((test_X.shape[0], n_lags_used*n_features))
 
 # invert scaling for forecast
-inv_yhat = concatenate((yhat, test_X[:, -7:]), axis=1)
+inv_yhat = concatenate((yhat, test_X[:, -(n_features-1):]), axis=1)
 inv_yhat = scaler.inverse_transform(inv_yhat)
 inv_yhat = inv_yhat[:,0]
 
 # invert scaling for actual
 test_y = test_y.reshape((len(test_y), 1))
-inv_y = concatenate((test_y, test_X[:, -7:]), axis=1)
+inv_y = concatenate((test_y, test_X[:, -(n_features-1):]), axis=1)
 inv_y = scaler.inverse_transform(inv_y)
 inv_y = inv_y[:,0]
 
@@ -192,52 +185,6 @@ df = DataFrame(Data)
 df.to_csv(path_env+'output.csv')
 
 
-
-
-
-#
-#
-#
-#train = inv_y
-#valid = inv_yhat
-#
-#
-#len(inv_y)
-#len(inv_yhat)
-#len(index_test[n_train_lags_used+3:])
-#
-#import matplotlib.pyplot as plt
-#%matplotlib inline
-#
-#plt.plot(inv_y)
-#plt.plot(inv_yhat)
-#
-#
-#
-#test[:, :n_obs], test[:, -n_features]
-#
-#
-#DataFrame(test[:, :n_obs]).to_csv(path_env+'1.csv')
-#DataFrame(test[:, -n_features]).to_csv(path_env+'2.csv')
-#
-#
-#DataFrame(scaled).to_csv(path_env+'1.csv')
-#DataFrame(reframed).to_csv(path_env+'2.csv')
-#
-#
-#
-#
-#reframed.head(5)
-#
-#
-#scaled
-#print(reframed.shape)
-#
-#
-#
-#
-#
-
-
+df.plot()
 
 

@@ -46,7 +46,9 @@ from  tools.tools_scraping import *
 #RUN THIS JUST FIRST TIME
 #get index files from SEC EDGAR, you should provide the folder to download and starting year
 import edgar
-edgar.download_index(path_sec, 1994)
+
+#In case library does not respond: https://www.sec.gov/Archives/edgar/full-index/2017/QTR3/master.zip to /var/folders/bv/2zbdkyyj14766dcw07x6zrrr0000gn/T/tmpr2Nk3o/2017-QTR3.tsv
+edgar.download_index(path_sec,1994)
 
 file_name_pickle = get_index("SC 13Ds",path_sec,path_pickle)
 print("Got a new pickle name!", file_name_pickle)
