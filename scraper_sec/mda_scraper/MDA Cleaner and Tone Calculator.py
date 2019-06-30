@@ -1,6 +1,7 @@
 """
-This program first identifies valid MD&A sections and then computes the tone of these sections.  The final output file will by 
-SampleData.txt and it is saved in the file that you designate as filepath3.
+This program first identifies valid MD&A sections and then computes the tone of
+ these sections.  The final output file will by SampleData.txt and it is saved 
+ in the file that you designate as filepath3.
 """
 import csv
 import re
@@ -11,23 +12,29 @@ import os
 path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
 ###############################################################################
 
-
 path_code = path_env + "/scraper_sec/mda_scraper/"
 
-#This is the filepath of the Financial Statement text documents. This must be changed to your respective filepath.
-filepath=path_code+"/downloaded_mda/"
+#This is the filepath of the Financial Statement text documents. 
+download_path = path_code+"../downloaded_files/mdas/"
+
+filepath=download_path+"/downloaded_mda/" 
+
+
+#create the directory to download     
+if not os.path.exists(filepath):
+    os.makedirs(filepath)
 
 
 #This is the filepath of the word dictionary files.  This must be changed to your respective filepath.
 filepath2=path_code+"/Word_Dictionaries"
 
 #if doesnt exist, create an output  folder
-if not os.path.exists(path_code+"cleaned_mda"):
-    os.makedirs(path_code+"cleaned_mda")
+if not os.path.exists(download_path+"cleaned_mda"):
+    os.makedirs(download_path+"cleaned_mda")
 
 #This is where you would like the cleaned / identified MD&A section text files to be written.  This file must also include the 
 #downloadlog file from the previously run MASTERSCRAPE.py program.
-filepath3=path_code+"/cleaned_mda"
+filepath3=download_path+"/cleaned_mda/"
 
 NEGATIVE=os.path.join(filepath2,"NEGATIVE.txt")
 POSITIVE=os.path.join(filepath2,"POSITIVE.txt")
@@ -48,7 +55,8 @@ DONE
 '''
 
 '''
-The following are the phrases that must be identified for a particular section to be considered a MD&A section.
+The following are the phrases that must be identified for a particular section 
+to be considered a MD&A section.
 '''
 sayings=["the following discussion","this discussion and analysis","should be read in conjunction", "should be read together with", "the following managements discussion and analysis"]
 acq=["Acquisition","acquisition","merger","Merger","Buyout","buyout"]    
@@ -91,7 +99,7 @@ with open(download, 'r') as txtfile:
             SIC=""
             Info=[str(FileNUM)]
             hand=open(Filer)
-            
+            print("cleaning")
             
             for line in hand:    
                 line=line.strip()
@@ -202,6 +210,7 @@ with open(download, 'r') as txtfile:
                 print (Post)
                 Post=[]
             else:
+                print("session not 1")
                 for k in range(0,len(locations),2):
                     filed=0
                     substring1=str1[locations[0+k]:locations[1+k]]
@@ -209,9 +218,10 @@ with open(download, 'r') as txtfile:
                     substring1=substring1.split(". ")
                     if len(substring1)>5:
                         for j in range(0,6):
-                            if any(s in substring1[j] for s in sayings):
-                                filed=1
-                                break
+                            #Pundrich comment: this restricts the MD&A and is not clear why is done. I choose to leave more general at this stage. Uncomment to get back to original
+                            #if any(s in substring1[j] for s in sayings):
+                            filed=1
+                            break
                     if filed==1:
                         substring1=str1[locations[0+k]:locations[1+k]]
                         substring1=substring1.lower()
@@ -262,7 +272,7 @@ with open(download, 'r') as txtfile:
                         TONE = (PLUS-NEG)/TWORD
                         Post.append(str(TONE))
 
-                        
+
                         with open(CLEAN,'a') as f:
                             f.write("<SECTION>\n")
                             f.write(' '.join(substring1)+"\n")

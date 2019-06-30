@@ -14,7 +14,14 @@ Created on Thu Feb  7 14:08:14 2019
 #SET UP MACROS
  
 #path to your own code (where this file is located)
-path_code = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
+###############################################################################
+path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/"
+###############################################################################
+
+path_code = path_env
+
+
+#path_sec  = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/scraper_sec/build_sec_index/index_SEC/"
 
 #path to sec index, first time leave it empty
 path_sec  = path_code+"/scraper_sec/build_sec_index/index_SEC/"
@@ -41,34 +48,34 @@ import sys
 import pickle
 import os
 
-from  tools.tools_scraping import *
+from  tools.pundrich_sctools import *
 
-#RUN THIS JUST FIRST TIME
+#For teaching reasons... check this code
 #get index files from SEC EDGAR, you should provide the folder to download and starting year
-import edgar
+#import edgar
 
-#In case library does not respond: https://www.sec.gov/Archives/edgar/full-index/2017/QTR3/master.zip to /var/folders/bv/2zbdkyyj14766dcw07x6zrrr0000gn/T/tmpr2Nk3o/2017-QTR3.tsv
-edgar.download_index(path_sec,1994)
+#Using old library
+#edgar.download_index(path_sec,1994)
 
-file_name_pickle = get_index("SC 13Ds",path_sec,path_pickle)
-print("Got a new pickle name!", file_name_pickle)
+#Using Pundrich's lib: this library is beta... please report any bugs.
+#build_index_sec(start_year,end_period,path_sec)
 
-#filter just DEF14A or 10K files, etc
+build_index_sec(1992,2020,path_sec)
+
 file_name_pickle = get_index("DEF 14A",path_sec,path_pickle)
 print("Got a new pickle name!", file_name_pickle)
 
 file_name_pickle = get_index("10-K",path_sec,path_pickle)
 print("Got a new pickle name!", file_name_pickle)
 
-file_name_pickle = get_index("SC 13D",path_sec,path_pickle)
-print("Got a new pickle name!", file_name_pickle)
-
-
 file_name_pickle = get_index("10-Q",path_sec,path_pickle)
 print("Got a new pickle name!", file_name_pickle)
 
 
 
-
+"""""
+Note: You can choose after creating all pickles to remove the files on path_sec
+and save up to 2.5Gb
+"""""
 
 

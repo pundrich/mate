@@ -16,25 +16,20 @@ def install(package):
 
 install("html2text")
 
-
 install("python-edgar")
 
+install("vaderSentiment")
 
+install("plotly")
 
+install("cufflinks")
 
-
-
-#install("vaderSentiment")
-
-#install("plotly")
-
-#install("cufflinks")
 install("tensorflow")
 
 install("stop_words")
+
 install("gensim")
 
 
 
 
-pip install fastai==0.7.0

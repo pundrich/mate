@@ -31,7 +31,7 @@ url_sec = 'https://www.sec.gov/Archives/'
 
 
 import sys
-sys.path.append(path_code)
+sys.path.append(path_env)
 
 import string
 import pandas as pd
@@ -49,7 +49,7 @@ import sys
 import pickle
 import os
 
-from  tools.tools_scraping import *
+from  tools.pundrich_sctools import *
 import os
 
 

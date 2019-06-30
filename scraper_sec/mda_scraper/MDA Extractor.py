@@ -1,5 +1,7 @@
+import os
 """
-Adapted from code by "Do Tone Changes in Financial Statements Predict Acquisition Behavior?" by John Berns, Patty Bick, Ryan Flugum and Reza Houston.
+Adapted from code by "Do Tone Changes in Financial Statements Predict Acquisition
+ Behavior?" by John Berns, Patty Bick, Ryan Flugum and Reza Houston.
 """
 
 ###############################################################################################
@@ -8,7 +10,8 @@ Adapted from code by "Do Tone Changes in Financial Statements Predict Acquisitio
 ###############################################################################################
 ###############################################################################################
 '''
-This is the filepath of where you would like the text files of possible MD&A sections to be saved.  It is also the location of the downloadlist.txt file
+This is the filepath of where you would like the text files of possible MD&A 
+sections to be saved.  It is also the location of the downloadlist.txt file
 that includes all of the filing links.
 '''
 
@@ -19,14 +22,31 @@ path_env = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/
 
 
 
+
+
 path_code = path_env + "/scraper_sec/mda_scraper/"
+
+
+
+
+#This is the filepath of the Financial Statement text documents. 
+download_path = path_code+"../downloaded_files/mdas/"
+
+filepath=download_path+"/downloaded_mda/" 
+
+
+#create the directory to download     
+if not os.path.exists(filepath):
+    os.makedirs(filepath)
+
+
 
 #input files to the code
 path_input = path_code+"/../input/"
 
 root_path = path_code
 
-filepath=root_path
+#filepath=root_path
 
 import pandas as pd
 import csv
@@ -52,45 +72,12 @@ sec_index = pickle.load( open(path_env + file_name_pickle, "rb" ) )
 sec_index.columns
 
 #if doesnt exist, create a download folder
-if not os.path.exists(filepath+"downloaded_mda"):
-    os.makedirs(filepath+"downloaded_mda")
+if not os.path.exists(filepath):
+    os.makedirs(filepath)
     
-#GET LIST OF FIRMS THAT WE ARE INTERESTED IN COLLECTING DATA
-df_cik_firms = pd.read_csv(path_input + "collect_mda.csv", sep=',',header=0) 
-
-#get slice to calculate year
-year_report =  (sec_index["report_date"].str[:4])
-
-sec_index['Year'] = year_report
-
-df_cik_firms.columns
-df_cik_firms.dtypes
-
-sec_index.columns
-sec_index.dtypes
-
-#change datatype of pandas
-sec_index['Year'] = sec_index['Year'].apply(lambda x: int(x))
-
-#merge pandas: inner - intersection, outer - n:n, left (master) and right (using)
-# left join in python
-#it has a larger number of rows than left df because of duplicates on using data: df.merge(df2.drop_duplicates(subset=['A']), how='left')
-combined = pd.merge(sec_index, df_cik_firms, on=['cik'], how='left')
 
 
-#clean, get only documents where you have SDC data, i.e., not missing year
-df_clean = combined[pd.notnull(combined['CEO_TARGET'])]
-#listtest = df_clean.cik.unique()
-
-df_clean.columns
-
-#get latest year - year before M&A
-df_clean = df_clean.sort_values(['cik', 'Year'],ascending=[True, True])
-df_clean.cik.unique()
-df_clean = df_clean.drop_duplicates(subset='cik', keep="last")
-
-
-#restart index
+#restart index or use the merged using df_clean
 df_clean = sec_index
 
 
@@ -104,7 +91,7 @@ temp1=os.path.join(filepath,"newfile.txt")
 #################################################################################
 #This is the file that records the number of sections for each respective filing.
 #################################################################################
-LOG=os.path.join(filepath+"/downloaded_mda/","DOWNLOADLOG.txt")
+LOG=os.path.join(filepath,"DOWNLOADLOG.txt")
 with open(LOG,'w') as f:
     f.write("Filer\tSECTIONS\n")
     f.close()
@@ -113,18 +100,14 @@ with open(LOG,'w') as f:
 url_sec = 'https://www.sec.gov/Archives/'
 
 
-
-
-
-
 ######## Download the filing ############
 for index, row in df_clean.iterrows():
     #get text and html urls from sec
     url = (url_sec + row['file_url_txt'])
     url_html = (url_sec + row['file_url_html'])           
-    print (index)
+    #print (index)
     FileNUM = index
-    Filer=os.path.join(filepath+"/downloaded_mda", str(FileNUM)+".txt")
+    Filer=os.path.join(filepath, str(FileNUM)+".txt")
 
     with open(temp, 'wb') as f:
         f.write(requests.get('%s' % url).content)
