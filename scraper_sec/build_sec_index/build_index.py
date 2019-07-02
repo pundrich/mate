@@ -6,8 +6,6 @@ Created on Thu Feb  7 14:08:14 2019
 @author: gabrielpundrich
 
 
-#SC 13D/A	
-
 """
 
 

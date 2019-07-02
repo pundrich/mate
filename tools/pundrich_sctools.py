@@ -271,12 +271,12 @@ def build_index_sec(start_year,end_period,path_sec):
     try:
         #Download SEC files
             
-#        start_year = 1992
-#        end_period = 1993
-#        
+#        start_year = 1996
+#        end_period = 1998
+##        
 #        path_sec  = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/scraper_sec/build_sec_index/index_SEC/"
+##        
 #        
-        
         import os
         
         
@@ -286,7 +286,13 @@ def build_index_sec(start_year,end_period,path_sec):
         
         
         for each_year in range(start_year,end_period):
+            print(each_year)
             for each_quarter in range(1,5):
+                print(each_quarter)
+                
+                
+                
+                
                 sec_url = "https://www.sec.gov/Archives/edgar/full-index/"
                 full_adress = sec_url + str(each_year) + "/QTR"+str(each_quarter) + "/master.zip" 
         
@@ -312,7 +318,7 @@ def build_index_sec(start_year,end_period,path_sec):
                     #skiprows=1 will skip first line and try to read from second line
                     df = pd.read_csv(path_sec+name_quarter_file_tsv, skiprows=9, sep='|',encoding = "ISO-8859-1" )
                     df.columns
-    
+
                     #add a column with url
                     df["url"] =  df["Filename"].replace('.txt','-index.html',regex=True)
     
@@ -320,6 +326,9 @@ def build_index_sec(start_year,end_period,path_sec):
                     new_df = df.iloc[1:]
                     new_df.head()
                     df.head()
+                    
+                    
+                    
                     
                     new_df.to_csv(path_sec+name_quarter_file_tsv, sep='|',index=False, header=False)
                     
@@ -332,8 +341,7 @@ def build_index_sec(start_year,end_period,path_sec):
        
     try:
         #Clean ZIP files
-        dir_name = path_sec
-        test = os.listdir(dir_name)
+        test = os.listdir(path_sec)
         
         for item in test:
             if item.endswith(".zip"):
