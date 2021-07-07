@@ -265,92 +265,44 @@ def has_age(text):
         
 
 
+def build_index_sec(start_year, end_period, path_sec="./sec_index", output_header=False):
+    """
+    download master index from sec and save it per year & quarter
+    :param start_year: integer
+    :param end_period: integer
+    :param path_sec: folder path to save index
+    :return: None
+    """
+    import io
+    import os
+    import pandas as pd
+    import requests
+    from tqdm import trange
 
-def build_index_sec(start_year,end_period,path_sec):
-    import traceback
-    try:
-        #Download SEC files
-            
-#        start_year = 1996
-#        end_period = 1998
-##        
-#        path_sec  = "/Users/gabrielpundrich/Dropbox/finance_accounting_data_science/mate/scraper_sec/build_sec_index/index_SEC/"
-##        
-#        
-        import os
-        
-        
-        
-        if not os.path.exists(path_sec):
-            os.makedirs(path_sec)
-        
-        
-        for each_year in range(start_year,end_period):
-            print(each_year)
-            for each_quarter in range(1,5):
-                print(each_quarter)
-                
-                
-                
-                
-                sec_url = "https://www.sec.gov/Archives/edgar/full-index/"
-                full_adress = sec_url + str(each_year) + "/QTR"+str(each_quarter) + "/master.zip" 
-        
-                name_quarter_file_zip = str(each_year)+"-QTR"+str(each_quarter)+".zip"
-                name_quarter_file_tsv = str(each_year)+"-QTR"+str(each_quarter)+".tsv"
-                
-                try:
-                    from six.moves import urllib
-                    urllib.request.urlretrieve(full_adress, path_sec+name_quarter_file_zip)
-                
-                    
-                    path_to_zip_file = path_sec+name_quarter_file_zip
-                    
-                    
-                    import zipfile
-                    with zipfile.ZipFile(path_to_zip_file,"r") as zip_ref:
-                        zip_ref.extractall(path_sec)
-                    
-                    
-                    os.rename(path_sec+"master.idx", path_sec+name_quarter_file_tsv) 
-                    
-                    
-                    #skiprows=1 will skip first line and try to read from second line
-                    df = pd.read_csv(path_sec+name_quarter_file_tsv, skiprows=9, sep='|',encoding = "ISO-8859-1" )
-                    df.columns
+    if not os.path.exists(path_sec):
+        os.makedirs(path_sec)
 
-                    #add a column with url
-                    df["url"] =  df["Filename"].replace('.txt','-index.html',regex=True)
-    
-                    #clean first rows
-                    new_df = df.iloc[1:]
-                    new_df.head()
-                    df.head()
-                    
-                    
-                    
-                    
-                    new_df.to_csv(path_sec+name_quarter_file_tsv, sep='|',index=False, header=False)
-                    
-                    print("Download "+ name_quarter_file_tsv)
-                except:
-                    print("Could not download for "+str(each_year))
-    except:
-        print(traceback.format_exc())
-    
-       
-    try:
-        #Clean ZIP files
-        test = os.listdir(path_sec)
-        
-        for item in test:
-            if item.endswith(".zip"):
-                os.remove(os.path.join(dir_name, item))
-                
-                
-    except:
-       print("Warning, coult not clean all zip files") 
-     
+    sec_url = "https://www.sec.gov/Archives/edgar/full-index/"
+    column_names = ['CIK', 'Company Name', 'Form Type', 'Date Filed', 'Filename']
+    dat_types = {"CIK": int, 'Company Name': str, 'Form Type': str, 'Date Filed': str, 'Filename': str}
+
+    for each_year in trange(start_year, end_period + 1):
+        for each_quarter in range(1, 5):
+            master_index_url = sec_url + f"{each_year}/QTR{each_quarter}/master.zip"
+            response = requests.get(master_index_url)
+            if response.ok:
+                master_index = pd.read_csv(io.BytesIO(response.content),
+                                           skiprows=11,
+                                           sep="|",
+                                           compression='zip',
+                                           names=column_names,
+                                           dtype=dat_types)
+                master_index['url'] = master_index['Filename'].str.replace(".txt", '-index.html')
+                save_file_path = os.path.join(path_sec, f"{each_year}-QTR{each_quarter}.tsv")
+                master_index.to_csv(save_file_path, sep='|', index=False, header=output_header)
+            else:
+                print(f"Not able to download master index for year {each_year} quarter {each_quarter}.")
+
    
 
 
